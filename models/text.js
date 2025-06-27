@@ -6,7 +6,7 @@ const textSchema = new mongoose.Schema({
     required: true,
     validate: {
       message: 'A name must not exceed 50 characters.',
-      validator: (content) => content.length <= 50
+      validator: (content) => content.length <= 200
     }
   },
   bodyoftext: {
