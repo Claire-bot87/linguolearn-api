@@ -4,9 +4,11 @@ import mongoose from 'mongoose'
 import morgan from 'morgan'
 import mongoSanitize from 'express-mongo-sanitize'
 import 'dotenv/config' 
+import errorHandler from './middleware/errorHandler.js'
 import userController from './controllers/userController.js'
 import textController from './controllers/textController.js'
 import questionController from './controllers/questionController.js'
+import articleController from './controllers/articleController.js'
 import cors from 'cors'
 
 
@@ -53,8 +55,10 @@ app.use(morgan('dev'))
 app.use('/', userController)
 app.use('/', textController)
 app.use('/', questionController)
+app.use('/', articleController)
 
-
+// Error Handling
+app.use(errorHandler)
 //server connection
 const establishServerConnections = async () => {
     try {

@@ -17,9 +17,27 @@ router.get('/texts', async (req, res, next) => {
 })
 
 
-// * Create route
-router.post('/texts', validateToken, async (req, res, next) => {
+// * Create route - use this route when we want anyone to be able to add a text
+router.post('/texts',
+   //validateToken, 
+   async (req, res, next) => {
+console.log('TEXT POST REQUEST LOADED👍')
+  try {
+    // req.body.owner = req.user._id
+    console.log(`api log: ${req.body}`)
+    const text = await Text.create(req.body)
+    return res.status(201).json(text)
+  } catch (error) {
+    next(error)
+  }
+})
 
+
+// * Create route - add this route in if you want visitors to have to log in to add a text to the DB
+router.post('/texts',
+   //validateToken, 
+   async (req, res, next) => {
+console.log('TEXT POST REQUEST LOADED👍')
   try {
     // The req.body is only going to contain the "content" field
     // _id, createdAt, updatedAt will all automatically be generated without us doing anything
@@ -27,6 +45,7 @@ router.post('/texts', validateToken, async (req, res, next) => {
     // * Author, however, needs to be created by us inside this controller, post token validation
 console.log('USER ID' + req.user._id)
     req.body.owner = req.user._id
+    console.log(`api log: ${req.body}`)
     const text = await Text.create(req.body)
     return res.status(201).json(text)
   } catch (error) {

@@ -23,6 +23,7 @@ router.post('/signup', async (req, res, next) => {
         token
       })
     } catch (error) {
+      console.log(error.code, Object.keys(error.keyPattern)[0])
       next(error)
     }
   })

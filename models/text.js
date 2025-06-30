@@ -5,7 +5,7 @@ const textSchema = new mongoose.Schema({
     type: String,
     required: true,
     validate: {
-      message: 'A name must not exceed 50 characters.',
+      message: 'A name must not exceed 200 characters.',
       validator: (content) => content.length <= 200
     }
   },
@@ -13,7 +13,7 @@ const textSchema = new mongoose.Schema({
     type: String,
     required: true,
     validate: {
-      message: 'A name must not exceed 50 characters.',
+      message: 'A name must not exceed 5000 characters.',
       validator: (content) => content.length <= 5000
     }
   },
@@ -31,5 +31,5 @@ const textSchema = new mongoose.Schema({
 
 
 
-const Text =  mongoose.model('Text', textSchema)
+const Text = mongoose.models.Text || mongoose.model('Text', textSchema)
 export {Text}
